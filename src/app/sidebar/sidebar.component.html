@@ -1,0 +1,138 @@
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
+
+
+<div class="d-flex align-items-start" style="width: fit-content">
+  <div
+    class="nav flex-column nav-pills me-3"
+    id="v-pills-tab"
+    role="tablist"
+    aria-orientation="vertical"
+  >
+    <ul
+      class="cd-accordion margin-top-lg margin-bottom-lg"
+      style="margin-top: 10px"
+    >
+      <li *ngFor="let pr of parent"
+        class="cd-accordion__item cd-accordion__item--has-children"
+        class="nav-item"
+      >
+        <input
+          class="cd-accordion__input"
+          type="checkbox"
+          name={{pr.id}}
+          id={{pr.id}}
+          (click)="getChildFolders(pr.name)"
+          
+        />
+
+        <label
+          class="cd-accordion__label cd-accordion__label--icon-folder"
+          for={{pr.id}}
+          ><span>
+            <i
+              class="fa fa-angle-right"
+              aria-hidden="true"
+              style="padding-right: 5px"
+            ></i>
+            <i
+              class="fa fa-folder-open"
+              aria-hidden="true"
+              style="padding-right: 10px"
+            ></i>
+            {{pr.name}}
+          </span>
+        </label>
+
+        <ul  *ngFor="let ch of child" class="cd-accordion__sub cd-accordion__sub--l1"  >
+          <li *ngIf=" ch.url == null" class="cd-accordion__item cd-accordion__item--has-children"
+               class="nav-item"
+          >
+          
+            <input
+              class="cd-accordion__input"
+              type="checkbox"
+              name={{ch.id}}
+              id={{ch.id}}
+              (click)="getSousChildFolders(ch.name)"
+            />
+            
+            <label
+              class="cd-accordion__label cd-accordion__label--icon-folder"
+              for={{ch.id}}
+              ><span>
+                <i
+              class="fa fa-angle-right"
+              aria-hidden="true"
+              style="padding-right: 5px"
+            ></i>
+            <i
+              class="fa fa-folder-open"
+              aria-hidden="true"
+              style="padding-right: 10px"
+            ></i>
+                {{ch.name}}</span></label
+            >
+            
+
+            <ul *ngFor="let sch of schild" class="cd-accordion__sub cd-accordion__sub--l2">
+
+              <li  *ngIf=" sch.url == null" class="cd-accordion__item cd-accordion__item--has-children"
+              class="nav-item">
+                <input
+                  class="cd-accordion__input"
+                  type="checkbox"
+                  name={{sch.id}}
+                  id={{sch.id}}
+                />
+                <label
+                  class="cd-accordion__label cd-accordion__label--icon-folder"
+                  for={{sch.id}}
+                  ><span>
+                    <i
+                    class="fa fa-angle-right"
+                    aria-hidden="true"
+                    style="padding-right: 5px"
+                  ></i>
+                  <i
+                    class="fa fa-folder-open"
+                    aria-hidden="true"
+                    style="padding-right: 10px"
+                  ></i>
+                    {{sch.name}}</span></label
+                >
+              </li>
+              <li *ngIf=" sch.url != null" class="cd-accordion__item">
+                <a
+                  class="cd-accordion__label cd-accordion__label--icon-img"
+                  
+                  (click)="showFile(sch.url)"
+                  href=""
+                  ><span>
+                    
+                    <i class="fa fa-file" aria-hidden="true" style="padding-right: 10px"></i>
+                    {{sch.name}}</span></a
+                >
+              </li>
+            </ul>
+          </li>
+
+          <li *ngIf=" ch.url != null" class="cd-accordion__item">
+            <a
+              class="cd-accordion__label cd-accordion__label--icon-img"
+              href=""
+              (click)="showFile(ch.url)"
+              ><span>
+                
+                <i class="fa fa-file" aria-hidden="true" style="padding-right: 10px"></i>
+                {{ch.name}}</span></a
+>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <!-- cd-accordion -->
+  </div>
+</div>
